@@ -22,7 +22,7 @@ var nowTimeCmd = &cobra.Command{
 	Long:  "获取当前时间",
 	Run: func(cmd *cobra.Command, args []string) {
 		nowTime := timer.GetNowTime()
-		log.Printf("输出结果：%s, %d", nowTime.Format("2006-01-02 15:04:06"), nowTime.Unix())
+		log.Printf("输出结果：%s, %d", nowTime.Format("2006-01-02 15:04:05"), nowTime.Unix())
 		//log.Printf("输出结果：%s, %d", nowTime, nowTime.Unix())
 	},
 }
@@ -36,7 +36,7 @@ var calculateTimeCmd = &cobra.Command{
 	Long:  "计算所需时间",
 	Run: func(cmd *cobra.Command, args []string) {
 		var currentTimer time.Time
-		var layout = "2006-01-02 15:04:06"
+		var layout = "2006-01-02 15:04:05"
 		if calculateTime == "" {
 			currentTimer = timer.GetNowTime()
 		} else {
