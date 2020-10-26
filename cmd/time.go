@@ -9,6 +9,13 @@ import (
 	"time"
 )
 
+var timeCmd = &cobra.Command{
+	Use:   "time",
+	Short: "时间格式处理",
+	Long:  "时间格式处理",
+	Run:   func(cmd *cobra.Command, args []string) {},
+}
+
 var nowTimeCmd = &cobra.Command{
 	Use:   "time",
 	Short: "时间格式处理",
@@ -57,8 +64,8 @@ var calculateTimeCmd = &cobra.Command{
 }
 
 func init() {
-	nowTimeCmd.AddCommand(nowTimeCmd)
-	nowTimeCmd.AddCommand(calculateTimeCmd)
+	timeCmd.AddCommand(nowTimeCmd)
+	timeCmd.AddCommand(calculateTimeCmd)
 
 	calculateTimeCmd.Flags().StringVarP(&calculateTime, "calculate", "c", "", `需要计算的时间，有效单位为时间戳或已格式化后的时间`)
 	calculateTimeCmd.Flags().StringVarP(&duration, "duration", "d", "", `持续时间，有效时间单位为"ns", "us" (or "µs"), "ms", "s", "m", "h"`)
