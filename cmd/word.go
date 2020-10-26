@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	MODE_UPPER		= iota + 1
+	MODE_UPPER = iota + 1
 	MODE_LOWER
 	MODE_UNDERSCORE_TO_UPPER_CAMELCASE
 	MODE_UNDERSCORE_TO_LOWER_CAMELCASE
@@ -27,7 +27,7 @@ var desc = strings.Join([]string{
 }, "\n")
 
 var wordCmd = &cobra.Command{
-	Use: "word",
+	Use:   "word",
 	Short: "单词格式转换",
 	Long:  desc,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -53,5 +53,4 @@ var wordCmd = &cobra.Command{
 func init() {
 	wordCmd.Flags().StringVarP(&str, "str", "s", "", "请输入单词内容")
 	wordCmd.Flags().Int8VarP(&mode, "mode", "m", 0, "请输入单词转换的模式")
-
 }
