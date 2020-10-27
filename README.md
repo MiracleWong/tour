@@ -1,5 +1,16 @@
 # Tour
 
+tour（工具集）是《Go 语言编程之旅：一起用 Go 做项目》中的项目，是第一章 [命令行应用：打造属于自己的工具集] 的代码。
+
+说明：本仓库是自己学习 Go 时，不是官方仓库，官方仓库请移步：[go-programming-tour-book/tour](https://github.com/go-programming-tour-book/tour)
+
+## 功能清单
+
+- 单词格式转换
+- 便利的时间工具
+- SQL语句到结构体的转换 
+- JSON 到结构体的转换
+
 ## 单词格式转换 word
 
 ### 测试命令
