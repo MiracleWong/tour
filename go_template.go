@@ -15,7 +15,7 @@ Output 1: {{ title .Name2 }}
 Output 2: {{ .Name3 | title }} 
 `
 
-// 如果想要执行时，反注释掉 main，注释 ll()即可
+// 如果想要执行时，反注释掉 main，注释 ll()即可，还需要将 main.go 中的 main 改名字
 // func main() {
 func ll() {
 	funcMap := template.FuncMap{"title": strings.Title}
