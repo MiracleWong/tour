@@ -41,12 +41,8 @@ var calculateTimeCmd = &cobra.Command{
 			currentTimer = timer.GetNowTime()
 		} else {
 			var err error
-			space := strings.Count(calculateTime, " ")
-			if space == 0 {
+			if !strings.Contains(calculateTime, "") {
 				layout = "2006-01-02"
-			}
-			if space == 1 {
-				layout = "2006-01-02 15:04"
 			}
 			currentTimer, err = time.Parse(layout, calculateTime)
 			if err != nil {
@@ -54,12 +50,12 @@ var calculateTimeCmd = &cobra.Command{
 				currentTimer = time.Unix(int64((t)), 0)
 			}
 		}
-		t, err := timer.GetCalculateTime(currentTimer, duration)
+		calculateTime, err := timer.GetCalculateTime(currentTimer, duration)
 		if err != nil {
 			log.Fatalf("timer.GetCalculateTime err: %v", err)
 		}
 
-		log.Printf("输出结果: %s, %d", t.Format(layout), t.Unix())
+		log.Printf("输出结果: %s, %d", calculateTime.Format(layout), calculateTime.Unix())
 	},
 }
 
