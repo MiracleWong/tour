@@ -82,6 +82,44 @@ func (m *DBModel) Connect() error {
 	return nil
 }
 
+// 我自己的数据库信息
+//SELECT COLUMN_NAME, DATA_TYPE, COLUMN_KEY, IS_NULLABLE, COLUMN_TYPE, COLUMN_COMMENT FROM COLUMNS WHERE TABLE_SCHEMA = 'nba' AND TABLE_NAME = 'player';
+//+-------------+-----------+------------+-------------+--------------+----------------+
+//| COLUMN_NAME | DATA_TYPE | COLUMN_KEY | IS_NULLABLE | COLUMN_TYPE  | COLUMN_COMMENT |
+//+-------------+-----------+------------+-------------+--------------+----------------+
+//| player_id   | int       | PRI        | NO          | int(11)      | 球员ID         |
+//| team_id     | int       |            | NO          | int(11)      | 球队ID         |
+//| player_name | varchar   | UNI        | NO          | varchar(255) | 球员姓名       |
+//| height      | float     |            | YES         | float(3,2)   | 球员身高       |
+//+-------------+-----------+------------+-------------+--------------+----------------+
+//4 rows in set (0.00 sec)
+
+//SELECT COLUMN_NAME, DATA_TYPE, COLUMN_KEY, IS_NULLABLE, COLUMN_TYPE, COLUMN_COMMENT FROM COLUMNS WHERE TABLE_SCHEMA = 'nba' AND TABLE_NAME = 'player_score';
+//+------------------+-----------+------------+-------------+-------------+-----------------------------------+
+//| COLUMN_NAME      | DATA_TYPE | COLUMN_KEY | IS_NULLABLE | COLUMN_TYPE | COLUMN_COMMENT                    |
+//+------------------+-----------+------------+-------------+-------------+-----------------------------------+
+//| game_id          | int       |            | NO          | int(11)     | 比赛ID                            |
+//| player_id        | int       |            | NO          | int(11)     | 球员ID                            |
+//| is_first         | tinyint   |            | NO          | tinyint(1)  | 是否首发                          |
+//| playing_time     | int       |            | NO          | int(11)     | 该球员本次比赛出场时间            |
+//| rebound          | int       |            | NO          | int(11)     | 篮板球                            |
+//| rebound_o        | int       |            | NO          | int(11)     | 前场篮板                          |
+//| rebound_d        | int       |            | NO          | int(11)     | 后场篮板                          |
+//| assist           | int       |            | NO          | int(11)     | 助攻                              |
+//| score            | int       |            | NO          | int(11)     | 比分                              |
+//| steal            | int       |            | NO          | int(11)     | 抢断                              |
+//| blockshot        | int       |            | NO          | int(11)     | 盖帽                              |
+//| fault            | int       |            | NO          | int(11)     | 失误                              |
+//| foul             | int       |            | NO          | int(11)     | 犯规                              |
+//| shoot_attempts   | int       |            | NO          | int(11)     | 总出手                            |
+//| shoot_hits       | int       |            | NO          | int(11)     | 命中                              |
+//| shoot_3_attempts | int       |            | NO          | int(11)     | 3分出手                           |
+//| shoot_3_hits     | int       |            | NO          | int(11)     | 3分命中                           |
+//| shoot_p_attempts | int       |            | NO          | int(11)     | 罚球出手                          |
+//| shoot_p_hits     | int       |            | NO          | int(11)     | 罚球命中                          |
+//+------------------+-----------+------------+-------------+-------------+-----------------------------------+
+//19 rows in set (0.00 sec)
+
 // 针对columns 表进行查询和数据组装
 func (m *DBModel) GetColumns(dbName, tableName string) ([]*TableColumn, error) {
 	query := "SELECT COLUMN_NAME, DATA_TYPE, COLUMN_KEY, " +
