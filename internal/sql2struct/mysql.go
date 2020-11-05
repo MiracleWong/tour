@@ -62,6 +62,10 @@ var DBTypeToStructType = map[string]string{
 	"double":     "float64",
 }
 
+func NewDBModel(dbInfo *DBInfo) *DBModel {
+	return &DBModel{DBInfo: dbInfo}
+}
+
 // Go 中，连接数据库的方法
 func (m *DBModel) Connect() error {
 	var err error
