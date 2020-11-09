@@ -33,7 +33,7 @@ type TableColumn struct {
 	ColumnComment string
 }
 
-// 表字段的类型映射
+// 表字段的类型映射，使用枚举，用 ap 作映射获取
 var DBTypeToStructType = map[string]string{
 	"int":        "int32",
 	"tinyint":    "int8",
