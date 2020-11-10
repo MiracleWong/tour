@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/MiracleWong/tour/internal/sql2struct"
 	"github.com/spf13/cobra"
 	"log"
@@ -32,7 +31,6 @@ var sql2structCmd = &cobra.Command{
 			Password: password, Charset: charset}
 		dbModel := sql2struct.NewDBModel(dbInfo)
 		err := dbModel.Connect()
-		log.Println(err)
 		if err != nil {
 			log.Fatal("dbModel.Connect err: %v", err)
 		}
@@ -42,7 +40,6 @@ var sql2structCmd = &cobra.Command{
 		}
 		template := sql2struct.NewStructTemplate()
 		templateColumns := template.AssemblyColumns(columns)
-		fmt.Print(templateColumns)
 		err = template.Generate(tableName, templateColumns)
 		if err != nil {
 			log.Fatalf("template.Generate err: %v", err)
