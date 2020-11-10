@@ -32,3 +32,13 @@ go run main.go time now
 go run main.go time calc -c="2029-09-04 15:04:02" -d=5m
 go run main.go time calc -c="2029-09-04 12:02:33" -d=-12h
 ```
+
+
+## SQL转换和处理 sql
+```
+# 启动 mysql（前提是 Mac 上有 MySQL）
+
+go run main.go sql struct --username root --password 123456 --db nba --table player
+go run main.go sql struct --username root --password 123456 --db nba --table player_score
+```
+
