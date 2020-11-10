@@ -2,7 +2,9 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/MiracleWong/tour/internal/sql2struct"
 	"github.com/spf13/cobra"
+	"log"
 )
 
 // 声明7各 cmd 全局变量。用于接收外部的命令行参数
@@ -26,10 +28,35 @@ var sql2structCmd = &cobra.Command{
 	Short: "sql 转换",
 	Long:  "sql 转换",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("struct ")
+		dbInfo := &sql2struct.DBInfo{DBType: dbType, Host: host, UserName: username,
+			Password: password, Charset: charset}
+		dbModel := sql2struct.NewDBModel(dbInfo)
+		err := dbModel.Connect()
+		log.Println(err)
+		if err != nil {
+			log.Fatal("dbModel.Connect err: %v", err)
+		}
+		columns, err := dbModel.GetColumns(dbName, tableName)
+		if err != nil {
+			log.Fatal("dbModel.GetColumns err: %v", err)
+		}
+		template := sql2struct.NewStructTemplate()
+		templateColumns := template.AssemblyColumns(columns)
+		fmt.Print(templateColumns)
+		err = template.Generate(tableName, templateColumns)
+		if err != nil {
+			log.Fatalf("template.Generate err: %v", err)
+		}
 	},
 }
 
 func init() {
 	sqlCmd.AddCommand(sql2structCmd)
+	sql2structCmd.Flags().StringVarP(&username, "username", "", "", "请输入数据库的账号")
+	sql2structCmd.Flags().StringVarP(&password, "password", "", "", "请输入数据库的密码")
+	sql2structCmd.Flags().StringVarP(&host, "host", "", "127.0.0.1:3306", "请输入数据库的HOST")
+	sql2structCmd.Flags().StringVarP(&charset, "charset", "", "utf8mb4", "请输入数据库的编码")
+	sql2structCmd.Flags().StringVarP(&dbType, "type", "", "mysql", "请输入数据库实例类型")
+	sql2structCmd.Flags().StringVarP(&dbName, "db", "", "", "请输入数据库名称")
+	sql2structCmd.Flags().StringVarP(&tableName, "table", "", "", "请输入表名称")
 }
