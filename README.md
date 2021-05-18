@@ -4,6 +4,13 @@ tour（工具集）是《Go 语言编程之旅：一起用 Go 做项目》中的
 
 说明：本仓库是自己学习 Go 时，不是官方仓库，官方仓库请移步：[go-programming-tour-book/tour](https://github.com/go-programming-tour-book/tour)
 
+
+## 安装对应的库（和书上版本可能不一致）
+
+```shell
+export GO111MODULE=on 
+go get -u github.com/spf13/cobra@v1.1.1
+```
 ## 功能清单
 
 - 单词格式转换
