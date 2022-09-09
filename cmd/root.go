@@ -13,8 +13,9 @@ func Execute() error {
 }
 
 func init() {
+	// rootCmd 加入4个子命令
+	rootCmd.AddCommand(demoCmd)
 	rootCmd.AddCommand(wordCmd)
 	rootCmd.AddCommand(timeCmd)
-	rootCmd.AddCommand(demoCmd)
 	rootCmd.AddCommand(sqlCmd)
 }
