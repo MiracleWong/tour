@@ -19,7 +19,7 @@ Output 1: {{ title .Name2 }}
 Output 2: {{ .Name3 | title }} 
 `
 
-// 如果想要执行时，反注释掉 main，注释 ll()即可，还需要将 main.go 中的 main 改名字
+// 如果想要执行时，反注释掉 main，注释 ll()即可，还需要将 root.go 中的 main 改名字
 // func main() {
 func ll() {
 	// 名称标识：FuncMap 注册了自定义函数
