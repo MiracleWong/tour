@@ -20,9 +20,8 @@ Output 2: {{ .Name3 | title }}
 `
 
 // 如果想要执行时，反注释掉 main，注释 ll()即可，还需要将 root.go 中的 main 改名字
-// func main() {
-func ll() {
-	// 名称标识：FuncMap 注册了自定义函数
+func main() {
+	// 名称标识：FuncMap注册了自定义函数
 	funcMap := template.FuncMap{"title": strings.Title}
 	// New 根据给的的名称标识，创建新的模板对象
 	// Parse 将常量templateText，解析为当前文本的主体内容
