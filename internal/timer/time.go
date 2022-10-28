@@ -5,7 +5,8 @@ import (
 )
 
 func GetNowTime() time.Time {
-	return time.Now()
+	location, _ := time.LoadLocation("Asia/Shanghai")
+	return time.Now().In(location)
 }
 
 // 计算时间
