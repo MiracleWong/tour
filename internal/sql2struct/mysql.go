@@ -29,11 +29,43 @@ type TableColumn struct {
 	ColumnComment string
 }
 
+// 表字段的类型映射，使用枚举，用 map 作映射获取
+
+var DBTypeToStructType = map[string]string{
+	"int":        "int32",
+	"tinyint":    "int8",
+	"smallint":   "int",
+	"mediumint":  "int64",
+	"bigint":     "int64",
+	"bit":        "int",
+	"bool":       "bool",
+	"enum":       "string",
+	"set":        "string",
+	"varchar":    "string",
+	"char":       "string",
+	"tinytext":   "string",
+	"mediumtext": "string",
+	"text":       "string",
+	"longtext":   "string",
+	"blob":       "string",
+	"tinyblob":   "string",
+	"mediumblob": "string",
+	"longblob":   "string",
+	"date":       "time.Time",
+	"datetime":   "time.Time",
+	"timestamp":  "time.Time",
+	"time":       "time.Time",
+	"float":      "float64",
+	"double":     "float64",
+}
+
 // COLUMN_KEY  转换为： ColumnKey
 
 func NewDBModel(info *DBInfo) *DBModel {
 	return &DBModel{DBInfo: info}
 }
+
+// 连接MySQL数据库
 
 func (m *DBModel) Connect() error {
 	var err error
@@ -52,6 +84,8 @@ func (m *DBModel) Connect() error {
 	}
 	return nil
 }
+
+// 针对COLUMNS 进行查询和组装
 
 func (m *DBModel) GetColumns(dbName, tableName string) ([]*TableColumn, error) {
 	query := "SELECT COLUMN_NAME, DATA_TYPE, COLUMN_KEY, " +

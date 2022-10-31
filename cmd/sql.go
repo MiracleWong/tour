@@ -33,6 +33,9 @@ var sqlCmd = &cobra.Command{
 		columns, err := dbModel.GetColumns(dbName, tableName)
 
 		log.Printf("输出的格式是：%v", columns)
+		if err != nil {
+			log.Fatalf("dbModel.GetColumns err: %v", err)
+		}
 
 		for _, column := range columns {
 			log.Printf("输出的格式是：%v", column.ColumnName)
