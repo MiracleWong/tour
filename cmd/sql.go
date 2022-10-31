@@ -6,6 +6,9 @@ import (
 	"log"
 )
 
+var dbName string
+var tableName string
+
 var sqlCmd = &cobra.Command{
 	Use:   "sql",
 	Short: "数据库表格式转换",
@@ -25,6 +28,16 @@ var sqlCmd = &cobra.Command{
 			log.Fatalf("dbModel.Connect error: %v", err)
 		}
 		log.Printf("输出的格式是：%v", *dbModel.DBInfo)
+		dbName = "demo7"
+		tableName = "operator"
+		columns, err := dbModel.GetColumns(dbName, tableName)
+
+		log.Printf("输出的格式是：%v", columns)
+
+		for _, column := range columns {
+			log.Printf("输出的格式是：%v", column.ColumnName)
+		}
+
 	},
 }
 
