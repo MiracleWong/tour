@@ -1,11 +1,32 @@
 package main
 
 import (
+	"errors"
 	"flag"
+	"fmt"
 	"log"
 )
 
 var name string
+
+type Value interface {
+	String() string
+	Set(string) error
+}
+
+type Name string
+
+func (i *Name) String() string {
+	return fmt.Sprint(*i)
+}
+
+func (i *Name) Set(value string) error {
+	if len(*i) > 0 {
+		return errors.New("name flag already set")
+	}
+	*i = Name("Hello: " + value)
+	return nil
+}
 
 func main() {
 	//var name string
@@ -15,28 +36,34 @@ func main() {
 	//
 	//log.Printf("name: %s ", name)
 
-	// 命令行定义为解析的标志
-	// 解析并绑定命令行的参数
+	//// 命令行定义为解析的标志
+	//// 解析并绑定命令行的参数
+	//flag.Parse()
+	//
+	//// 创建一个新的命令集，NewFlagSet支持子命令
+	//// 方法第二个参数是ErrorHandling，有ContinueOnError、ExitOnError、PanicOnError三种模式
+	//goCmd := flag.NewFlagSet("go", flag.ExitOnError)
+	//goCmd.StringVar(&name, "name", "Go语言", "帮助信息")
+	//phpCmd := flag.NewFlagSet("php", flag.ExitOnError)
+	//phpCmd.StringVar(&name, "n", "PHP语言", "帮助信息")
+	//
+	//// Args把新的空命令集做为外部参数传入
+	//args := flag.Args()
+	//switch args[0] {
+	//case "go":
+	//	// 对解析方法的进一步封装
+	//	_ = goCmd.Parse(args[1:])
+	//case "php":
+	//	_ = phpCmd.Parse(args[1:])
+	//
+	//}
+	//
+	//log.Printf("name: %s", name)
+
+	var name Name
+	flag.Var(&name, "name", "帮助信息")
 	flag.Parse()
 
-	// 创建一个新的命令集，NewFlagSet支持子命令
-	// 方法第二个参数是ErrorHandling，有ContinueOnError、ExitOnError、PanicOnError三种模式
-	goCmd := flag.NewFlagSet("go", flag.ExitOnError)
-	goCmd.StringVar(&name, "name", "Go语言", "帮助信息")
-	phpCmd := flag.NewFlagSet("php", flag.ExitOnError)
-	phpCmd.StringVar(&name, "n", "PHP语言", "帮助信息")
-
-	// Args把新的空命令集做为外部参数传入
-	args := flag.Args()
-	switch args[0] {
-	case "go":
-		// 对解析方法的进一步封装
-		_ = goCmd.Parse(args[1:])
-	case "php":
-		_ = phpCmd.Parse(args[1:])
-
-	}
-
-	log.Printf("name: %s", name)
+	log.Printf("name: %s ", name)
 
 }
