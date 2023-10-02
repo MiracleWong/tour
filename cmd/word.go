@@ -40,6 +40,8 @@ var wordCmd = &cobra.Command{
 			content = word.ToLower(str)
 		case MODE_UNDERSCORE_TO_UPPER_CAMELCASE:
 			content = word.UnderScoreToUpperCamelCase(str)
+		case MODE_UNDERSCORE_TO_LOWER_CAMELCASE:
+			content = word.UnderScoreToLowerCamelCase(str)
 		default:
 			log.Fatal("暂不支持现在的单词转换模式")
 		}
