@@ -1,6 +1,7 @@
 package word
 
 import (
+	"fmt"
 	"strings"
 	"unicode"
 )
@@ -32,4 +33,23 @@ func UnderScoreToUpperCamelCase(s string) string {
 func UnderScoreToLowerCamelCase(s string) string {
 	s = UnderScoreToUpperCamelCase(s)
 	return string(unicode.ToLower(rune(s[0]))) + s[1:]
+}
+
+// 驼峰单词转换成下划线单词
+
+func CamelCaseToUnderScore(s string) string {
+	var output []rune
+	for i, r := range s {
+		fmt.Println(i, r)
+		if i == 0 {
+			output = append(output, unicode.ToLower(r))
+		} else {
+			if unicode.IsUpper(r) {
+				output = append(output, '_')
+			}
+
+			output = append(output, unicode.ToLower(r))
+		}
+	}
+	return string(output)
 }
