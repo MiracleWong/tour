@@ -1,7 +1,6 @@
 package word
 
 import (
-	"fmt"
 	"strings"
 	"unicode"
 )
@@ -40,7 +39,7 @@ func UnderScoreToLowerCamelCase(s string) string {
 func CamelCaseToUnderScore(s string) string {
 	var output []rune
 	for i, r := range s {
-		fmt.Println(i, r)
+		//fmt.Println(i, r)
 		if i == 0 {
 			output = append(output, unicode.ToLower(r))
 		} else {
