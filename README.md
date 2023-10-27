@@ -20,6 +20,19 @@ go get -u github.com/spf13/cobra@v1.1.1
 
 ## 单词格式转换 word
 
+### 安装 cobra 
+
+```
+go get -u github.com/spf13/cobra@v1.1.1
+```
+
+### 结构
+- cmd
+  - root.go
+  - word.go
+- internal
+- pkg
+
 ### 测试命令
 
 ```
